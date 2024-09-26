@@ -12,7 +12,7 @@ const Pln = ({ nominal, isSelected, onClick }) => {
       }`}
     >
       <div className="font-bold">Rp {value.toLocaleString()}</div>
-      <div className="text-sm text-gray-600">Rp{total.toLocaleString()}</div>
+      <div className="text-sm text-gray-600">Rp {total.toLocaleString()}</div>
     </div>
   );
 };

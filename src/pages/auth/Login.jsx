@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { MdOutlineAlternateEmail, MdLockOutline } from 'react-icons/md';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import imageSrc from '../auth/login.jpg'; // Update the path if needed
+import axios from 'axios';
 
 const translations = {
   en: {
@@ -59,13 +60,21 @@ const Login = () => {
     return Object.keys(tempErrors).length === 0;
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      // Add login logic here
-      navigate('/');
+      try {
+        const response = await axios.post('https://api.beetpos.com/api/v1/auth/login', { email, password });
+        const { token } = response.data.data;
+        console.log("token", token);
+        localStorage.setItem('token', token); // Simpan token di localStorage
+        navigate('/'); // Arahkan ke halaman lain setelah login
+      } catch (error) {
+        setErrors({ general: 'Login failed, please check your credentials' });
+      }
     }
   };
+
 
   const handleChange = (setter) => (e) => {
     setter(e.target.value);

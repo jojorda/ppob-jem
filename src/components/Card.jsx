@@ -2,7 +2,7 @@ import React from 'react';
 
 const Card = ({ children }) => {
   return (
-    <div className="px-10 max-w-xl mx-auto">
+    <div className="px-10  mx-auto">
       {children}
     </div>
   );
